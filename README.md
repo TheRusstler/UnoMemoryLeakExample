@@ -10,18 +10,10 @@ Run these steps while using the [Xamarin Profiler](https://docs.microsoft.com/en
 4. Repeat steps 2 and 3 ad nauseum (around 20-30 times will increase memory usage to ~30MB).
 5. Stop repeatedly navigating and do nothing for however long you would like.
 6. Take snapshots every 30 seconds or so in the Xamarin Profiler tool and see that the memory footprint remains roughly the same forever.
+7. View the Console to see multiple "**Inactive binder references**" of `Windows.UI.Xaml.Controls.TextBox`, one persisting for each navigation.
 
 ## What's causing the issue?
 
-It's the `TextBlock` binding to the view model in the `SecondaryPage.xaml` that causes the view and view model to never be garbage collected. You can see the binding code [here](https://github.com/rc65/UnoMemoryLeakExample/blob/3b499b41bba4a73d96adb182742830dd8b0bf1e0/UnoMemoryLeakExample/UnoMemoryLeakExample.Shared/SecondaryPage.xaml#L21-L24).
+It's the `TextBox` in the `SecondaryPage.xaml` which is not garbage collected. You can see the code [here](https://github.com/TheRusstler/UnoMemoryLeakExample/blob/master/UnoMemoryLeakExample/UnoMemoryLeakExample.Shared/SecondaryPage.xaml#L21).
 
-You can remove the binding and set it to something like
-
-```xaml
-<TextBlock
-    HorizontalAlignment="Center"
-    FontSize="50"
-    Text="This is not bound to the view model." />
-```
-
-and then rerun the `Steps to Reproduce` listed above and you will see that the memory leak no longer occurs.
+You can  comment out the TextBox control and then rerun the `Steps to Reproduce` listed above and you will see that the memory leak no longer occurs.

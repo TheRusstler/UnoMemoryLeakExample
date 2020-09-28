@@ -16,4 +16,6 @@ Run these steps while using the [Xamarin Profiler](https://docs.microsoft.com/en
 
 It's the `TextBox` in the `SecondaryPage.xaml` which is not garbage collected. You can see the code [here](https://github.com/TheRusstler/UnoMemoryLeakExample/blob/master/UnoMemoryLeakExample/UnoMemoryLeakExample.Shared/SecondaryPage.xaml#L21).
 
-You can  comment out the TextBox control and then rerun the `Steps to Reproduce` listed above and you will see that the memory leak no longer occurs.
+You can comment out the TextBox control and then rerun the `Steps to Reproduce` listed above and you will see that the memory leak no longer occurs.
+
+Note that the View and ViewModels **are** being collected, just the `TextBox` control is not.

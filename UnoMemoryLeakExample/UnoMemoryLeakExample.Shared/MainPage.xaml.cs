@@ -1,14 +1,11 @@
-﻿using UnoMemoryLeakExample.Shared;
+﻿using System;
+using System.Runtime;
+using UnoMemoryLeakExample.Shared;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace UnoMemoryLeakExample
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -19,6 +16,20 @@ namespace UnoMemoryLeakExample
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(SecondaryPage));
+        }
+
+        private void GarbageButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("Forcing Garbage Collection");
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GC.Collect();
+            GC.Collect(3, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
+
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GC.Collect();
+            GC.Collect(3, GCCollectionMode.Forced, true, true);
+            GC.WaitForPendingFinalizers();
         }
     }
 }

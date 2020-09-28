@@ -17,5 +17,11 @@
             HorizontalAlignment="Center"
             Click="Button_Click"
             Content="Go to sub page" />
+
+        <Button
+            Margin="50"
+            HorizontalAlignment="Center"
+            Click="GarbageButton_Click"
+            Content="Invoke GC.Collect()" />
     </StackPanel>
 </Page>

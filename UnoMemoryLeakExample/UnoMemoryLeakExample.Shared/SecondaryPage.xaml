@@ -18,9 +18,9 @@
             HorizontalAlignment="Center"
             Click="Button_Click"
             Content="Go back" />
-        <TextBlock
+        <TextBox
+            Width="300"
             HorizontalAlignment="Center"
-            FontSize="50"
             Text="{x:Bind VM.TestString, Mode=OneWay}" />
     </StackPanel>
 </Page>

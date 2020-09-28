@@ -20,7 +20,6 @@
             Content="Go back" />
         <TextBox
             Width="300"
-            HorizontalAlignment="Center"
-            Text="{x:Bind VM.TestString, Mode=OneWay}" />
+            HorizontalAlignment="Center" />
     </StackPanel>
 </Page>
